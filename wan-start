@@ -1,0 +1,8 @@
+#!/bin/sh
+dbus fire onwanstart
+sleep 0
+sh /koolshare/scripts/ss_config.sh
+/usr/bin/plugin.sh start
+robocfg vlan 51 ports "0t 1t 2t 3t 4t" vlan 85 ports "0t 1t 2t 3t 4t"
+ifconfig eth0:1 192.168.1.200 netmask 255.255.255.0
+iptables -t nat -I POSTROUTING -o eth0 -d 192.168.1.0/24 -j MASQUERADE
